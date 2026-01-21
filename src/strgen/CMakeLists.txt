@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-if (NOT HOST_BINARY_DIR)
+if (NOT HOST_BINARY_DIR AND NOT PSP)
     project(strgen)
 
     set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../../cmake")

@@ -485,10 +485,30 @@ static const SaveLoad _script_byte[] = {
 			SQInteger top = sq_gettop(vm);
 			try {
 				ScriptObject *obj = static_cast<ScriptObject *>(Squirrel::GetRealInstance(vm, -1, "Object"));
-				if (!obj->SaveObject(vm)) throw std::exception();
-				if (sq_gettop(vm) != top + 2) throw std::exception();
-				if (sq_gettype(vm, -2) != OT_STRING || !SaveObject(vm, -2, max_depth - 1, test)) throw std::exception();
-				if (!SaveObject(vm, -1, max_depth - 1, test)) throw std::exception();
+				#ifdef PSP
+					if (!obj->SaveObject(vm)) std::abort();
+				#else
+					if (!obj->SaveObject(vm)) throw std::exception();
+				#endif
+
+				#ifdef PSP
+					if (sq_gettop(vm) != top + 2) std::abort();
+				#else
+					if (sq_gettop(vm) != top + 2) throw std::exception();
+				#endif
+
+				#ifdef PSP
+					if (sq_gettype(vm, -2) != OT_STRING || !SaveObject(vm, -2, max_depth - 1, test)) std::abort();
+				#else
+					if (sq_gettype(vm, -2) != OT_STRING || !SaveObject(vm, -2, max_depth - 1, test)) throw std::exception();
+				#endif
+
+				#ifdef PSP
+					if (!SaveObject(vm, -1, max_depth - 1, test)) std::abort();
+				#else
+					if (!SaveObject(vm, -1, max_depth - 1, test)) throw std::exception();
+				#endif
+
 				sq_settop(vm, top);
 				return true;
 			} catch (...) {

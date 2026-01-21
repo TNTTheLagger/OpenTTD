@@ -68,7 +68,12 @@ static uint8_t ReadByteFromFile(LoadgameState &ls)
 		/* We tried to read, but there is nothing in the file anymore.. */
 		if (count == 0) {
 			Debug(oldloader, 0, "Read past end of file, loading failed");
-			throw std::exception();
+			#ifdef PSP
+				std::abort();
+			#else
+				throw std::exception();
+			#endif
+
 		}
 
 		ls.buffer_count = count;
@@ -143,7 +148,12 @@ bool LoadChunk(LoadgameState &ls, void *base, const OldChunks *chunks)
 
 					case OC_ASSERT:
 						Debug(oldloader, 4, "Assert point: 0x{:X} / 0x{:X}", ls.total_read, reinterpret_cast<size_t>(chunk->ptr) + _bump_assert_value);
-						if (ls.total_read != reinterpret_cast<size_t>(chunk->ptr) + _bump_assert_value) throw std::exception();
+						#ifdef PSP
+							if (ls.total_read != reinterpret_cast<size_t>(chunk->ptr) + _bump_assert_value) std::abort();
+						#else
+							if (ls.total_read != reinterpret_cast<size_t>(chunk->ptr) + _bump_assert_value) throw std::exception();
+						#endif
+
 					default: break;
 				}
 			} else {

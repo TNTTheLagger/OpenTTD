@@ -38,7 +38,11 @@ void CDECL StrgenErrorI(const std::string &msg)
 void CDECL StrgenFatalI(const std::string &msg)
 {
 	Debug(script, 0, "{}:{}: FATAL: {}", _strgen.file, _strgen.cur_line, msg);
-	throw std::exception();
+	#ifdef PSP
+		std::abort();
+	#else
+		throw std::exception();
+	#endif
 }
 
 /**
@@ -283,7 +287,11 @@ void GameStrings::Compile()
 	StringData data(32);
 	StringListReader master_reader(data, this->raw_strings[0], true, false);
 	master_reader.ParseFile();
-	if (_strgen.errors != 0) throw std::exception();
+	#ifdef PSP
+		if (_strgen.errors != 0) std::abort();
+	#else
+		if (_strgen.errors != 0) throw std::exception();
+	#endif
 
 	this->version = data.Version();
 
@@ -296,7 +304,12 @@ void GameStrings::Compile()
 		data.FreeTranslation();
 		StringListReader translation_reader(data, p, false, p.language != "english");
 		translation_reader.ParseFile();
-		if (_strgen.errors != 0) throw std::exception();
+		#ifdef PSP
+			if (_strgen.errors != 0) std::abort();
+		#else
+			if (_strgen.errors != 0) throw std::exception();
+		#endif
+
 
 		auto &strings = this->compiled_strings.emplace_back(p.language);
 		TranslationWriter writer(strings.lines);

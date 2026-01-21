@@ -53,7 +53,11 @@ void StrgenErrorI(const std::string &msg)
 #ifdef _MSC_VER
 	fmt::print(stderr, LINE_NUM_FMT("warning"), _strgen.file, _strgen.cur_line, "language is not compiled");
 #endif
-	throw std::exception();
+	#ifdef PSP
+		std::abort();
+	#else
+		throw std::exception();
+	#endif
 }
 
 [[noreturn]] void FatalErrorI(const std::string &msg)

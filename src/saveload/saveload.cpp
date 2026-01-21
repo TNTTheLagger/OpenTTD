@@ -356,7 +356,11 @@ static void SlNullPointers()
 	/* Logging could be active. */
 	_gamelog.StopAnyAction();
 
-	throw std::exception();
+	#ifdef PSP
+		std::abort();
+	#else
+		throw std::exception();
+	#endif
 }
 
 /**

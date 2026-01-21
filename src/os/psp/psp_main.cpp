@@ -5,10 +5,14 @@
 #include <pspdebug.h>
 #include <psppower.h>
 #include <pspctrl.h>
+#include <span>
+#include <string_view>
 
 PSP_MODULE_INFO("OpenTTD", 0, 1, 0);
 PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER | THREAD_ATTR_VFPU);
 PSP_HEAP_SIZE_KB(-256);
+
+extern int openttd_main(std::span<std::string_view> arguments);
 
 static int exit_callback(int arg1, int arg2, void *common)
 {
@@ -45,13 +49,15 @@ void PSP_Init()
 // ==============================
 // PSP entry point
 // ==============================
-int main(int argc, char* argv[])
+int CDECL main(int argc, char* argv[])
 {
 	PSP_Init();
 
-	// Call the "real" OpenTTD main function
-	extern int openttd_main(int argc, char* argv[]);
-	return openttd_main(argc, argv);
+	// PSP has no args, so pass an empty span
+	std::string_view empty_args[] = {};
+	std::span<std::string_view> args(empty_args, 0);
+
+	return openttd_main(args);
 }
 
 #endif /* PSP */

@@ -25,7 +25,7 @@ add_compile_definitions(
 
 # --- Sources ---
 set(PSP_SOURCES
-        "${CMAKE_CURRENT_LIST_DIR}/psp.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/psp_main.cpp"
 )
 
 

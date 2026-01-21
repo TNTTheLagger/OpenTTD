@@ -50,7 +50,7 @@ target_link_libraries(openttd_psp
         pspge
         pspdebug
         pspkernel
-)`
+)
 
 
 
@@ -65,9 +65,9 @@ target_include_directories(openttd_psp PRIVATE
 
 # --- Compile Flags for PSP ---
 target_compile_options(openttd_psp PRIVATE
-    -DPSP
-    -fno-exceptions
-    -fno-rtti
+        -DPSP
+        -fno-exceptions
+        -fno-rtti
 )
 
 # --- Optional: Custom PSP build commands ---

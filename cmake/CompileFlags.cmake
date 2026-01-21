@@ -61,6 +61,16 @@ macro(compile_flags)
                 -Wno-multichar
             )
         endif()
+    elseif(PSP)
+    # PSP toolchain (psp-gcc / psp-g++)
+    # Use minimal, safe flags supported by PSPSDK
+    add_compile_options(
+            -Wall
+            -Wextra
+            -fno-strict-aliasing
+            -fno-exceptions
+            -fno-rtti
+    )
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
         add_compile_options(
             -W

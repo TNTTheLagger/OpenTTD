@@ -39,6 +39,7 @@ void PSP_Init()
 	scePowerSetClockFrequency(333, 333, 166);
 	sceCtrlSetSamplingCycle(0);
 	sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
+	pspDebugScreenInit();
 }
 
 // ==============================

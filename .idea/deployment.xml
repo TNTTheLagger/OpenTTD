@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeDeletion="false" showNewOnTargetInSync="false">
+    <option name="confirmBeforeDeletion" value="false" />
+    <serverData>
+      <paths name="Remote Host (0702379b-4d30-4661-8df7-305d131aa618)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.kYpgbQqwYF/OpenTTD" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-psp" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

@@ -1,4 +1,4 @@
-# OpenTTD
+# OpenTTD - Play Station Portable
 
 ## Table of contents
 

@@ -593,3 +593,11 @@ add_files(
     zoom_func.h
     zoom_type.h
 )
+
+if(PSP)
+    target_sources(openttd_lib PRIVATE
+        video/psp_v.cpp
+        video/psp_v.h
+        os/psp/psp.cpp
+    )
+endif()

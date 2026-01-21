@@ -4,6 +4,7 @@ include(GNUInstallDirs)
 #
 # set_directory_options()
 #
+
 function(set_directory_options)
     if(APPLE)
         set(DEFAULT_PERSONAL_DIR "Documents/OpenTTD")
@@ -13,6 +14,13 @@ function(set_directory_options)
         set(DEFAULT_PERSONAL_DIR "OpenTTD")
         set(DEFAULT_SHARED_DIR "(not set)")
         set(DEFAULT_GLOBAL_DIR "(not set)")
+    elseif(EMSCRIPTEN)
+        # Emscripten
+    elseif(PSP)
+        # PlayStation Portable
+        set(DEFAULT_PERSONAL_DIR "" PARENT_SCOPE)
+        set(DEFAULT_SHARED_DIR "" PARENT_SCOPE)
+        set(DEFAULT_GLOBAL_DIR "" PARENT_SCOPE)
     elseif(UNIX)
         set(DEFAULT_PERSONAL_DIR ".${BINARY_NAME}")
         set(DEFAULT_SHARED_DIR "(not set)")

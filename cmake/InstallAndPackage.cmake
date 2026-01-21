@@ -179,6 +179,14 @@ elseif(WIN32)
         COMMAND "${CMAKE_SOURCE_DIR}/os/windows/sign.bat" "${BINARY_DESTINATION_DIR}"
       )
     endif()
+elseif(EMSCRIPTEN)
+    # Emscripten packaging
+    set(CPACK_GENERATOR "ZIP")
+    set(CPACK_PACKAGE_FILE_NAME "openttd-#CPACK_PACKAGE_VERSION#-emscripten")
+elseif(PSP)
+    # PSP packaging - EBOOT.PBP is created in main CMakeLists.txt
+    # No additional packaging needed here
+    message(STATUS "PSP build - EBOOT.PBP will be created")
 elseif(UNIX)
     # With FHS, we can create deb/rpm/... Without it, they would be horribly broken
     # and not work. The other way around is also true; with FHS they are not
